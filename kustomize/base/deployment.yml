@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: workshop-gitops
+  name: workshop-gitops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workshop-gitops
+  template:
+    metadata:
+      labels:
+        app: workshop-gitops
+    spec:
+      containers:
+        - image: workshop-gitops
+          name: workshop-gitops
+          ports:
+            - name: http
+              containerPort: 8080
+      imagePullSecrets:
+      - name: registry-esys

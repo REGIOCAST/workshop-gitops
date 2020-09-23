@@ -23,3 +23,30 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD }}
                 registry: ${{ secrets.DOCKER_REGISTRY }}
                 repository: ${{ secrets.DOCKER_USERNAME }}/workshop-gitops
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v2
+            - name: Setup Kustomize
+              uses: imranismail/setup-kustomize@v1
+              with:
+                kustomize-version: "3.6.1"
+            - name: Update Kubernetes resources
+              env:
+                DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+              run: |
+                cd kustomize/base
+                kustomize edit set image workshop-gitops=$DOCKER_USERNAME/workshop-gitops:$GITHUB_SHA
+                cat kustomization.yaml
+            - name: Commit files
+              run: |
+                git config --local user.email "julian.koehn@regiocast.de"
+                git config --local user.name "Julian Koehn"
+                git commit -am "Bump docker tag"
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              with:
+              github_token: ${{ secrets.GITHUB_TOKEN }}
