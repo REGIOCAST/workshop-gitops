@@ -9,4 +9,4 @@ namespace: workshop-gitops
 images:
 - name: workshop-gitops
   newName: regiocast/workshop-gitops
-  newTag: 546bb54b92afbab1cc01aff216fc3a5f8dbd1306
+  newTag: 15a4682dace8698478c84256b95b9dd20ac3fa0e
