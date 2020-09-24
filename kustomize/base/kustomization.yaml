@@ -8,5 +8,5 @@ resources:
 namespace: workshop-gitops
 images:
 - name: workshop-gitops
-  newName: regiocast/workshop-gitops
-  newTag: 49a4c1789710d4d19268f366e6781c66fe31feb5
+  newName: registry.test.julian.pro/regiocast/workshop-gitops
+  newTag: c9985e3f5cb2f650a6deabcfba8243d384eeeb26
