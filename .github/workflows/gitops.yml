@@ -17,7 +17,7 @@ jobs:
               run: |
                 CGO_ENABLED=0 go test ./...
             - name: publish to registry
-              uses: elgohr/Publish-Docker-Github-Action@master
+              uses: elgohr/Publish-Docker-Github-Action@v5
               with:
                 name: ${{ secrets.DOCKER_USERNAME }}/workshop-gitops
                 username: ${{ secrets.DOCKER_USERNAME }}
